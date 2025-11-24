@@ -54,7 +54,7 @@ materialIcons.forEach(icon => {
         icon.style.color = 'var(--accent)';
         icon.style.transform = 'scale(1.2)';
     });
-    
+
     icon.addEventListener('mouseout', () => {
         // Reset to original state
         icon.style.animationPlayState = 'running';
@@ -75,7 +75,7 @@ materialIconsAbout.forEach(icon => {
         icon.style.zIndex = '10';
         icon.style.color = 'var(--accent)';
     });
-    
+
     icon.addEventListener('mouseout', () => {
         materialIconsAbout.forEach(i => {
             i.style.opacity = '';
@@ -90,14 +90,14 @@ materialIconsAbout.forEach(icon => {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        
+
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
-        
+
         if (targetElement) {
             const headerHeight = document.querySelector('.header').offsetHeight;
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-            
+
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
@@ -107,29 +107,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Reveal animations on scroll
-const revealElements = document.querySelectorAll('.service-card, .about-content, .material-icons-container, .instagram-container, .maps-container');
+// Reveal animations on scroll
+function reveal() {
+    var reveals = document.querySelectorAll('.reveal');
 
-function checkReveal() {
-    const windowHeight = window.innerHeight;
-    const revealPoint = 150;
-    
-    revealElements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        
-        if (elementTop < windowHeight - revealPoint) {
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 150;
+
+        if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add('active');
+        } else {
+            reveals[i].classList.remove('active');
         }
-    });
+    }
 }
 
-// Set initial styles for reveal elements
-revealElements.forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(30px)';
-    element.style.transition = 'all 0.8s ease';
-});
-
-// Check on load and scroll
-window.addEventListener('load', checkReveal);
-window.addEventListener('scroll', checkReveal);
+window.addEventListener('scroll', reveal);
+// Trigger once on load
+reveal();

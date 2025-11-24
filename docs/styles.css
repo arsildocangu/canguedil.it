@@ -1,18 +1,43 @@
 :root {
-    --primary: #1a1f45; /* Blu scuro dal logo */
-    --secondary: #4a90e2; /* Azzurro più vivace */
-    --accent: #ffd166; /* Giallo caldo, colore caramella */
-    --light: #f8f9fa;
-    --dark: #212529;
-    --gray: #6c757d;
+    --primary: #1a2a6c;
+    /* Deep Royal Blue */
+    --secondary: #b21f1f;
+    /* Deep Red accent */
+    --accent: #fdbb2d;
+    /* Gold */
+    --light: #f4f7f6;
+    /* Soft Gray-White */
+    --dark: #121212;
+    /* Almost Black */
+    --gray: #5a6268;
     --white: #ffffff;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
 }
 
 html {
@@ -81,7 +106,7 @@ body {
 
 /* Material Design Elements */
 .material-bg {
-    background: linear-gradient(135deg, var(--primary) 0%, #2d3a80 100%) !important;
+    background: linear-gradient(135deg, var(--primary) 0%, #0f172a 100%) !important;
 }
 
 /* MODIFICATO: Icone nella hero section */
@@ -120,9 +145,11 @@ body {
     0% {
         transform: translateX(-180px) rotate(0deg);
     }
+
     50% {
         transform: translateX(-180px) rotate(10deg);
     }
+
     100% {
         transform: translateX(-180px) rotate(0deg);
     }
@@ -132,9 +159,11 @@ body {
     0% {
         transform: translateX(0) rotate(0deg);
     }
+
     50% {
         transform: translateX(0) rotate(-8deg);
     }
+
     100% {
         transform: translateX(0) rotate(0deg);
     }
@@ -144,9 +173,11 @@ body {
     0% {
         transform: translateX(180px) rotate(0deg);
     }
+
     50% {
         transform: translateX(180px) rotate(10deg);
     }
+
     100% {
         transform: translateX(180px) rotate(0deg);
     }
@@ -326,10 +357,13 @@ body {
 }
 
 .logo-png {
-    width: 110px; /* Dimensione aumentata significativamente */
-    height: auto; /* Mantiene le proporzioni */
+    width: 110px;
+    /* Dimensione aumentata significativamente */
+    height: auto;
+    /* Mantiene le proporzioni */
     margin-right: 15px;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)); /* Ombra leggera */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    /* Ombra leggera */
     transition: transform 0.3s ease;
 }
 
@@ -398,13 +432,15 @@ body {
 /* Hero Section */
 .hero {
     height: 100vh;
-    min-height: 650px;
+    min-height: 700px;
     position: relative;
     overflow: hidden;
     display: flex;
     align-items: center;
     background-color: var(--primary);
-    margin-top: 70px;
+    margin-top: 0;
+    /* Removed margin-top as header is fixed/transparent initially */
+    padding-top: 80px;
 }
 
 .hero-bg {
@@ -414,10 +450,21 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
+    opacity: 0.9;
+}
+
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 20%, rgba(253, 187, 45, 0.15) 0%, transparent 40%);
 }
 
 .hero-content {
-    max-width: 700px;
+    max-width: 800px;
     color: var(--white);
     padding: 0 20px;
     position: relative;
@@ -427,38 +474,49 @@ body {
 }
 
 .hero-title {
-    font-size: 3.8rem;
-    line-height: 1.2;
+    font-size: 4rem;
+    line-height: 1.1;
     margin-bottom: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     animation: fadeInUp 1s ease;
 }
 
 .hero-subtitle {
-    font-size: 1.4rem;
-    margin-bottom: 2.5rem;
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
     opacity: 0.9;
+    font-weight: 400;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
     animation: fadeInUp 1s ease 0.2s forwards;
     opacity: 0;
 }
 
 .hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
     animation: fadeInUp 1s ease 0.4s forwards;
     opacity: 0;
 }
 
 .hero-buttons .btn:first-child {
-    margin-right: 15px;
+    margin-right: 0;
 }
 
 .hero-shape {
     position: absolute;
-    right: 0;
-    top: 10%;
-    width: 50%;
-    height: 80%;
-    background-color: rgba(255, 209, 102, 0.08);
-    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+    right: -10%;
+    top: -10%;
+    width: 60%;
+    height: 120%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    transform: rotate(-10deg);
     z-index: 0;
+    pointer-events: none;
 }
 
 /* About Section */
@@ -558,30 +616,35 @@ body {
 
 .service-card {
     background-color: var(--white);
-    border-radius: 10px;
-    padding: 30px;
-    transition: all 0.3s ease;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 40px 30px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: var(--shadow-sm);
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
 }
 
 .service-card::before {
     content: "";
     position: absolute;
     width: 100%;
-    height: 5px;
-    background-color: var(--accent);
-    bottom: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    top: 0;
     left: 0;
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
 .service-card:hover::before {
@@ -589,33 +652,42 @@ body {
 }
 
 .service-icon {
-    width: 70px;
-    height: 70px;
-    border-radius: 10px;
-    background-color: rgba(26, 31, 69, 0.1);
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    background-color: rgba(26, 42, 108, 0.05);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: var(--primary);
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
+    margin-bottom: 25px;
+    transition: all 0.4s ease;
 }
 
 .service-card:hover .service-icon {
     background-color: var(--primary);
     color: var(--white);
+    transform: rotateY(180deg);
+}
+
+.service-card:hover .service-icon i {
+    transform: rotateY(-180deg);
+    /* Keep icon facing forward */
 }
 
 .service-title {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-bottom: 15px;
     color: var(--primary);
+    font-weight: 700;
 }
 
 .service-desc {
     color: var(--gray);
-    font-size: 0.95rem;
+    font-size: 1rem;
+    line-height: 1.7;
+    flex-grow: 1;
 }
 
 /* Projects Section */
@@ -632,19 +704,23 @@ body {
     margin-top: 50px;
 }
 
-.instagram-container, .maps-container {
+.instagram-container,
+.maps-container {
     flex: 1;
     min-width: 300px;
-    max-width: 450px;
+    max-width: 500px;
     background-color: var(--white);
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.instagram-container:hover, .maps-container:hover {
-    transform: translateY(-5px);
+.instagram-container:hover,
+.maps-container:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
 }
 
 .showcase-title {
@@ -779,29 +855,55 @@ body {
 
 .contact-item {
     display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateX(10px);
+    box-shadow: var(--shadow-md);
 }
 
 .contact-icon {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(26, 31, 69, 0.1);
+    width: 60px;
+    height: 60px;
+    background-color: rgba(26, 42, 108, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: var(--primary);
-    margin-right: 15px;
+    margin-right: 20px;
     flex-shrink: 0;
 }
 
 .contact-item-content h4 {
     font-size: 1.1rem;
-    color: var(--primary);
     margin-bottom: 5px;
+    color: var(--primary);
+    font-weight: 700;
 }
+
+/* Scroll Animations */
+.reveal {
+    position: relative;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
 
 .contact-item-content p {
     color: var(--gray);
@@ -993,6 +1095,7 @@ body {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1004,97 +1107,103 @@ body {
     .section {
         padding: 70px 0;
     }
-    
+
     .section-title {
         font-size: 2.3rem;
     }
-    
+
     .hero-title {
         font-size: 3rem;
     }
-    
+
     .social-showcase {
         gap: 30px;
     }
-    
+
     /* MODIFICATO: Responsive per le icone della hero */
     .material-icon-hero {
         font-size: 70px !important;
     }
-    
+
     .material-icon-hero:nth-child(1) {
         transform: translateX(-150px);
     }
-    
+
     .material-icon-hero:nth-child(2) {
         transform: translateX(0);
     }
-    
+
     .material-icon-hero:nth-child(3) {
         transform: translateX(150px);
     }
-    
+
     @keyframes rotateIcon {
         0% {
             transform: translateX(-150px) rotate(0deg);
         }
+
         50% {
             transform: translateX(-150px) rotate(10deg);
         }
+
         100% {
             transform: translateX(-150px) rotate(0deg);
         }
     }
-    
+
     @keyframes rotateIconCenter {
         0% {
             transform: translateX(0) rotate(0deg);
         }
+
         50% {
             transform: translateX(0) rotate(-8deg);
         }
+
         100% {
             transform: translateX(0) rotate(0deg);
         }
     }
-    
+
     @keyframes rotateIconRight {
         0% {
             transform: translateX(150px) rotate(0deg);
         }
+
         50% {
             transform: translateX(150px) rotate(10deg);
         }
+
         100% {
             transform: translateX(150px) rotate(0deg);
         }
     }
-    
+
     .material-design-construction {
         width: 250px;
         height: 250px;
     }
-    
+
     .material-icon-about {
         font-size: 70px !important;
     }
-    
+
     .icon-building {
         top: 25px;
         left: 25px;
         font-size: 80px !important;
     }
-    
+
     .icon-tools {
         top: 25px;
         right: 25px;
     }
-    
+
     .icon-blueprint {
         bottom: 25px;
         left: 25px;
     }
-    
+
     .icon-worker {
         bottom: 25px;
         right: 25px;
@@ -1116,134 +1225,141 @@ body {
         z-index: 999;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
+
     .logo-png {
         width: 60px;
     }
-    
+
     .footer .logo-png {
         width: 50px;
     }
-    
+
     .nav-links.active {
         left: 0;
     }
-    
+
     .nav-links li {
         margin: 15px 0;
     }
-    
+
     .menu-toggle {
         display: flex;
     }
-    
+
     .menu-toggle.active span:nth-child(1) {
         transform: translateY(10px) rotate(45deg);
     }
-    
+
     .menu-toggle.active span:nth-child(2) {
         opacity: 0;
     }
-    
+
     .menu-toggle.active span:nth-child(3) {
         transform: translateY(-10px) rotate(-45deg);
     }
-    
+
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .hero-subtitle {
         font-size: 1.1rem;
     }
-    
+
     .social-showcase {
         flex-direction: column;
         align-items: center;
     }
-    
+
     /* MODIFICATO: Responsive per le icone della hero */
     .material-icon-hero {
         font-size: 60px !important;
     }
-    
+
     .material-icon-hero:nth-child(1) {
         transform: translateX(-120px);
     }
-    
+
     .material-icon-hero:nth-child(2) {
         transform: translateX(0);
     }
-    
+
     .material-icon-hero:nth-child(3) {
         transform: translateX(120px);
     }
-    
+
     @keyframes rotateIcon {
         0% {
             transform: translateX(-120px) rotate(0deg);
         }
+
         50% {
             transform: translateX(-120px) rotate(10deg);
         }
+
         100% {
             transform: translateX(-120px) rotate(0deg);
         }
     }
-    
+
     @keyframes rotateIconCenter {
         0% {
             transform: translateX(0) rotate(0deg);
         }
+
         50% {
             transform: translateX(0) rotate(-8deg);
         }
+
         100% {
             transform: translateX(0) rotate(0deg);
         }
     }
-    
+
     @keyframes rotateIconRight {
         0% {
             transform: translateX(120px) rotate(0deg);
         }
+
         50% {
             transform: translateX(120px) rotate(10deg);
         }
+
         100% {
             transform: translateX(120px) rotate(0deg);
         }
     }
-    
+
     .material-design-construction {
         width: 220px;
         height: 220px;
     }
-    
+
     .material-icon-about {
         font-size: 60px !important;
     }
-    
+
     .icon-building {
         top: 20px;
         left: 20px;
         font-size: 70px !important;
     }
-    
+
     .icon-tools {
         top: 20px;
         right: 20px;
     }
-    
+
     .icon-blueprint {
         bottom: 20px;
         left: 20px;
     }
-    
+
     .icon-worker {
         bottom: 20px;
         right: 20px;
     }
-    
+
     .contact-cta {
         flex-direction: column;
     }
@@ -1253,21 +1369,21 @@ body {
     .section {
         padding: 50px 0;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .hero-title {
         font-size: 2rem;
     }
-    
+
     .hero-buttons .btn {
         display: block;
         width: 100%;
         margin: 10px 0 !important;
     }
-    
+
     .material-icon-container {
         height: 120px;
     }
@@ -1275,91 +1391,98 @@ body {
     .logo-png {
         width: 50px;
     }
-    
+
     .footer .logo-png {
-        width: 90px; /* Dimensione aumentata anche nel footer */
+        width: 90px;
+        /* Dimensione aumentata anche nel footer */
         height: auto;
         margin-right: 0;
     }
-    
+
     /* MODIFICATO: Responsive per le icone della hero */
     .material-icon-hero {
         font-size: 45px !important;
     }
-    
+
     .material-icon-hero:nth-child(1) {
         transform: translateX(-80px);
     }
-    
+
     .material-icon-hero:nth-child(2) {
         transform: translateX(0);
     }
-    
+
     .material-icon-hero:nth-child(3) {
         transform: translateX(80px);
     }
-    
+
     @keyframes rotateIcon {
         0% {
             transform: translateX(-80px) rotate(0deg);
         }
+
         50% {
             transform: translateX(-80px) rotate(10deg);
         }
+
         100% {
             transform: translateX(-80px) rotate(0deg);
         }
     }
-    
+
     @keyframes rotateIconCenter {
         0% {
             transform: translateX(0) rotate(0deg);
         }
+
         50% {
             transform: translateX(0) rotate(-8deg);
         }
+
         100% {
             transform: translateX(0) rotate(0deg);
         }
     }
-    
+
     @keyframes rotateIconRight {
         0% {
             transform: translateX(80px) rotate(0deg);
         }
+
         50% {
             transform: translateX(80px) rotate(10deg);
         }
+
         100% {
             transform: translateX(80px) rotate(0deg);
         }
     }
-    
+
     .material-design-construction {
         width: 200px;
         height: 200px;
     }
-    
+
     .material-icon-about {
         font-size: 50px !important;
     }
-    
+
     .icon-building {
         top: 15px;
         left: 15px;
         font-size: 60px !important;
     }
-    
+
     .icon-tools {
         top: 15px;
         right: 15px;
     }
-    
+
     .icon-blueprint {
         bottom: 15px;
         left: 15px;
     }
-    
+
     .icon-worker {
         bottom: 15px;
         right: 15px;
@@ -1404,6 +1527,7 @@ body {
         background: rgba(255, 209, 102, 0.12);
         transform: skewX(-10deg) scaleX(1);
     }
+
     100% {
         background: rgba(255, 209, 102, 0.18);
         transform: skewX(-10deg) scaleX(1.02);
@@ -1420,6 +1544,7 @@ body {
     0% {
         clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
     }
+
     100% {
         clip-path: polygon(25% 0, 100% 0, 100% 100%, 5% 100%);
     }
@@ -1450,6 +1575,7 @@ body {
     0% {
         transform: translate(-50%, -50%) rotate(0deg);
     }
+
     100% {
         transform: translate(-50%, -50%) rotate(360deg);
     }
