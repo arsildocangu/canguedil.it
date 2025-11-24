@@ -833,8 +833,26 @@ img {
         grid-template-columns: 1fr;
     }
 
+    /* Fix contact buttons on mobile */
     .contact-cta {
         flex-direction: column;
+        width: 100%;
+    }
+
+    .contact-cta .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Fix social showcase grid on mobile */
+    .social-showcase {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .instagram-container,
+    .maps-container {
+        min-width: 100%;
     }
 }
 
