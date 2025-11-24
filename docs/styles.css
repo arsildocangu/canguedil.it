@@ -136,6 +136,7 @@ img {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    white-space: nowrap;
 }
 
 .btn-primary {
@@ -842,6 +843,8 @@ img {
     .contact-cta .btn {
         width: 100%;
         text-align: center;
+        padding: 14px 20px;
+        font-size: 0.85rem;
     }
 
     /* Fix social showcase grid on mobile */
