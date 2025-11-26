@@ -136,6 +136,44 @@ img {
     text-transform: uppercase;
 }
 
+/* Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal.zoom-in {
+    transform: scale(0.95);
+}
+
+.reveal.zoom-in.active {
+    transform: scale(1);
+}
+
+/* Staggered Delays */
+.delay-100 {
+    transition-delay: 0.1s;
+}
+
+.delay-200 {
+    transition-delay: 0.2s;
+}
+
+.delay-300 {
+    transition-delay: 0.3s;
+}
+
+.delay-400 {
+    transition-delay: 0.4s;
+}
+
+
 /* Buttons */
 .btn {
     display: inline-block;
@@ -303,7 +341,7 @@ img {
     height: 100%;
     background-image: url('./assets/hero-blueprint.png');
     background-size: cover;
-    background-position: center;
+    background-position: center bottom;
     z-index: -1;
 }
 
@@ -314,7 +352,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(27, 38, 49, 0.85), rgba(27, 38, 49, 0.65));
+    background: linear-gradient(to bottom, rgba(27, 38, 49, 0.75), rgba(27, 38, 49, 0.55));
     z-index: 0;
 }
 
@@ -552,8 +590,13 @@ img {
 
 .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
     border-color: var(--accent);
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
 }
 
 .service-icon {
@@ -858,11 +901,18 @@ img {
     }
 
     .hero-text-large {
-        font-size: 3rem;
+        font-size: 3.5rem;
+        /* Adjusted for better fit */
+        line-height: 1;
     }
 
     .hero-text-medium {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+        /* Smaller section titles */
     }
 
     /* Fix hero buttons on mobile */

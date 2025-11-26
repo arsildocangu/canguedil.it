@@ -106,24 +106,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Reveal animations on scroll
-// Reveal animations on scroll
-function reveal() {
-    var reveals = document.querySelectorAll('.reveal');
+// Reveal animations on scroll using IntersectionObserver
+const observerOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+};
 
-    for (var i = 0; i < reveals.length; i++) {
-        var windowHeight = window.innerHeight;
-        var elementTop = reveals[i].getBoundingClientRect().top;
-        var elementVisible = 150;
-
-        if (elementTop < windowHeight - elementVisible) {
-            reveals[i].classList.add('active');
-        } else {
-            reveals[i].classList.remove('active');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            // Optional: Stop observing once revealed
+            // observer.unobserve(entry.target);
         }
-    }
-}
+    });
+}, observerOptions);
 
-window.addEventListener('scroll', reveal);
-// Trigger once on load
-reveal();
+document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+});
+
+// Staggered animation for grids
+const staggerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const children = entry.target.querySelectorAll('.reveal');
+            children.forEach((child, index) => {
+                setTimeout(() => {
+                    child.classList.add('active');
+                }, index * 100); // 100ms delay between each item
+            });
+            staggerObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+// Observe grids for staggered effects if needed
+// document.querySelectorAll('.services-grid').forEach(grid => staggerObserver.observe(grid));
