@@ -1010,3 +1010,27 @@ img {
         font-size: 0.95rem;
     }
 }
+
+/* Clickable Social Boxes */
+.clickable-box {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clickable-box:hover {
+    transform: translateY(-5px);
+}
+
+.clickable-box .social-btn {
+    display: inline-block;
+    pointer-events: none;
+}
+
+/* Auto-elevated Service Cards */
+.service-card.active {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(192, 160, 98, 0.3);
+}

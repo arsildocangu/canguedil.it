@@ -126,6 +126,22 @@ document.querySelectorAll('.reveal').forEach(el => {
     observer.observe(el);
 });
 
+// Auto-elevate service cards on scroll
+const serviceCardObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, {
+    threshold: 0.3,
+    rootMargin: "0px"
+});
+
+document.querySelectorAll('.service-card').forEach(card => {
+    serviceCardObserver.observe(card);
+});
+
 // Staggered animation for grids
 const staggerObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
