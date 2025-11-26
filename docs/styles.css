@@ -182,12 +182,18 @@ img {
 
 .navbar {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
 }
 
 .logo-png {
-    width: 120px;
+    width: 180px;
     height: auto;
     filter: brightness(0) invert(1);
     /* White logo initially */
@@ -201,7 +207,16 @@ img {
 
 .nav-links {
     display: flex;
-    gap: 40px;
+    gap: 30px;
+    justify-content: center;
+}
+
+.nav-links-left {
+    justify-content: flex-start;
+}
+
+.nav-links-right {
+    justify-content: flex-end;
 }
 
 .nav-links a {
