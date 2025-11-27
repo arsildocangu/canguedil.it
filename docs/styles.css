@@ -988,33 +988,37 @@ img {
         color: var(--primary);
     }
 
+    .logo-png {
+        width: 140px;
+        /* Smaller logo on mobile */
+    }
+
     .hero-text-large {
-        font-size: clamp(2.5rem, 13vw, 3.5rem);
-        /* Adjusted for better fit */
-        line-height: 1;
-        word-break: break-word;
-        /* Prevent overflow if still too long */
+        font-size: clamp(2rem, 11vw, 3.2rem);
+        /* Slightly smaller to fit "COSTRUIAMO" */
+        line-height: 1.1;
+        margin-bottom: 10px;
     }
 
     .hero-text-medium {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 
     .section-title {
-        font-size: 2rem;
-        /* Smaller section titles */
+        font-size: 1.8rem;
     }
 
     /* Extra small devices */
     @media (max-width: 480px) {
         .hero-text-large {
-            font-size: 2.2rem;
-            /* Fits better on narrow screens */
+            font-size: 1.9rem;
+            /* Force smaller size on very narrow screens */
         }
 
         .hero-text-small {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             letter-spacing: 2px;
+            margin-top: 20px;
         }
     }
 
@@ -1077,12 +1081,13 @@ img {
 /* Landscape Mobile & Short Screen Fix */
 @media (max-height: 700px) {
     .hero {
-        min-height: 500px;
-        padding-top: 100px;
+        min-height: 550px;
+        /* More space */
+        padding-top: 110px;
     }
 
     .hero-text-large {
-        font-size: clamp(2.5rem, 8vw, 4rem);
+        font-size: clamp(2rem, 8vw, 3rem);
         margin-bottom: 5px;
     }
 
