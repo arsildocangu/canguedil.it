@@ -668,6 +668,7 @@ img {
 .instagram-title i {
     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 2rem;
 }
@@ -675,6 +676,7 @@ img {
 .maps-title i {
     background: linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 2rem;
 }
@@ -1064,4 +1066,35 @@ img {
 .service-card.active {
     transform: translateY(-10px);
     box-shadow: 0 15px 40px rgba(192, 160, 98, 0.3);
+    border-color: var(--accent);
+}
+
+/* Mobile/Touch Optimizations */
+@media (hover: none),
+(max-width: 768px) {
+
+    /* Disable hover effects on service cards to prevent "click" sticking */
+    .service-card:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: rgba(0, 0, 0, 0.05);
+    }
+
+    /* Re-apply active state (which will be triggered by JS scroll) */
+    .service-card.active {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--accent);
+    }
+
+    /* Make colored boxes always "active"/colored on mobile since there's no hover */
+    .instagram-container {
+        border-color: #C13584;
+        background: linear-gradient(to bottom, rgba(225, 48, 108, 0.03), var(--bg-light));
+    }
+
+    .maps-container {
+        border-color: #34A853;
+        background: linear-gradient(to bottom, rgba(66, 133, 244, 0.03), var(--bg-light));
+    }
 }
