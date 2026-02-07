@@ -325,8 +325,18 @@
                     <!-- Contact Form -->
                     <div class="contact-form-container reveal delay-100">
                         <h3 class="contact-info-title">Richiedi Preventivo</h3>
-                        <form class="contact-form" action="mailto:canguedil@gmail.com" method="post"
-                            enctype="text/plain">
+                        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+                            <!-- Web3Forms Access Key - Verrà generato automaticamente -->
+                            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                            <!-- Redirect dopo invio -->
+                            <input type="hidden" name="redirect" value="https://canguedil.it/?success=true">
+                            <!-- Subject personalizzato -->
+                            <input type="hidden" name="subject" value="Nuova Richiesta Preventivo - Cangu Edil">
+                            <!-- From name -->
+                            <input type="hidden" name="from_name" value="Sito Web Cangu Edil">
+                            <!-- Honeypot anti-spam (nascosto) -->
+                            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                            
                             <div class="form-group">
                                 <input type="text" name="nome" class="form-input" placeholder="Il tuo nome" required>
                             </div>
@@ -339,19 +349,30 @@
                             <div class="form-group">
                                 <select name="tipo_intervento" class="form-input" required>
                                     <option value="" disabled selected>Tipo di intervento</option>
-                                    <option value="ristrutturazione">Ristrutturazione</option>
-                                    <option value="nuova-costruzione">Nuova Costruzione</option>
-                                    <option value="piscina">Piscina</option>
-                                    <option value="tetto">Tetto/Copertura</option>
-                                    <option value="altro">Altro</option>
+                                    <option value="Ristrutturazione">Ristrutturazione</option>
+                                    <option value="Nuova Costruzione">Nuova Costruzione</option>
+                                    <option value="Piscina">Piscina</option>
+                                    <option value="Tetto/Copertura">Tetto/Copertura</option>
+                                    <option value="Altro">Altro</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <textarea name="messaggio" class="form-input" rows="4"
                                     placeholder="Descrivi brevemente il tuo progetto..." required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-accent btn-block">Invia Richiesta</button>
+                            <button type="submit" class="btn btn-accent btn-block" id="submit-btn">
+                                <span class="btn-text">Invia Richiesta</span>
+                                <span class="btn-loading" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin"></i> Invio in corso...
+                                </span>
+                            </button>
                         </form>
+                        <!-- Success message -->
+                        <div class="form-success" id="form-success" style="display: none;">
+                            <i class="fas fa-check-circle"></i>
+                            <h4>Richiesta Inviata!</h4>
+                            <p>Ti risponderemo al più presto.</p>
+                        </div>
                     </div>
                 </div>
             </div>

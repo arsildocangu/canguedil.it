@@ -144,3 +144,61 @@ if ('IntersectionObserver' in window && serviceCards.length > 0) {
         card.classList.add('active');
     });
 }
+
+// Contact Form Handling with Web3Forms
+const contactForm = document.getElementById('contact-form');
+const formSuccess = document.getElementById('form-success');
+const submitBtn = document.getElementById('submit-btn');
+
+// Check for success parameter in URL (redirect from Web3Forms)
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('success') === 'true' && contactForm && formSuccess) {
+    contactForm.style.display = 'none';
+    formSuccess.style.display = 'block';
+    // Clean up URL
+    window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+// Handle form submission via AJAX (no page reload)
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnLoading = submitBtn.querySelector('.btn-loading');
+
+        // Show loading state
+        if (btnText) btnText.style.display = 'none';
+        if (btnLoading) btnLoading.style.display = 'inline-flex';
+        submitBtn.disabled = true;
+
+        try {
+            const formData = new FormData(contactForm);
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Show success message
+                contactForm.style.display = 'none';
+                formSuccess.style.display = 'block';
+
+                // Scroll to show success message
+                formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                throw new Error(result.message || 'Errore durante l\'invio');
+            }
+        } catch (error) {
+            console.error('Form error:', error);
+            alert('Si è verificato un errore. Per favore riprova o contattaci telefonicamente.');
+
+            // Reset button state
+            if (btnText) btnText.style.display = 'inline';
+            if (btnLoading) btnLoading.style.display = 'none';
+            submitBtn.disabled = false;
+        }
+    });
+}
