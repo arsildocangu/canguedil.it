@@ -145,60 +145,59 @@ if ('IntersectionObserver' in window && serviceCards.length > 0) {
     });
 }
 
-// Contact Form Handling with Web3Forms
+// Contact Form - Mailto Raffinato
+// Costruisce un'email precompilata con i dati del form
 const contactForm = document.getElementById('contact-form');
-const formSuccess = document.getElementById('form-success');
-const submitBtn = document.getElementById('submit-btn');
 
-// Check for success parameter in URL (redirect from Web3Forms)
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('success') === 'true' && contactForm && formSuccess) {
-    contactForm.style.display = 'none';
-    formSuccess.style.display = 'block';
-    // Clean up URL
-    window.history.replaceState({}, document.title, window.location.pathname);
-}
-
-// Handle form submission via AJAX (no page reload)
 if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
+    contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const btnText = submitBtn.querySelector('.btn-text');
-        const btnLoading = submitBtn.querySelector('.btn-loading');
+        // Raccoglie i dati dal form
+        const nome = document.getElementById('form-nome').value.trim();
+        const email = document.getElementById('form-email').value.trim();
+        const telefono = document.getElementById('form-telefono').value.trim();
+        const tipo = document.getElementById('form-tipo').value;
+        const messaggio = document.getElementById('form-messaggio').value.trim();
 
-        // Show loading state
-        if (btnText) btnText.style.display = 'none';
-        if (btnLoading) btnLoading.style.display = 'inline-flex';
-        submitBtn.disabled = true;
+        // Costruisce il subject
+        const subject = `Richiesta Preventivo: ${tipo} - ${nome}`;
 
-        try {
-            const formData = new FormData(contactForm);
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData
-            });
+        // Costruisce il body dell'email in modo professionale
+        const body = `Gentile Cangu Edil,
 
-            const result = await response.json();
+Vi contatto tramite il vostro sito web per richiedere un preventivo.
 
-            if (result.success) {
-                // Show success message
-                contactForm.style.display = 'none';
-                formSuccess.style.display = 'block';
+═══════════════════════════════════
+📋 DETTAGLI RICHIESTA
+═══════════════════════════════════
 
-                // Scroll to show success message
-                formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            } else {
-                throw new Error(result.message || 'Errore durante l\'invio');
-            }
-        } catch (error) {
-            console.error('Form error:', error);
-            alert('Si è verificato un errore. Per favore riprova o contattaci telefonicamente.');
+👤 Nome: ${nome}
+📧 Email: ${email}
+📞 Telefono: ${telefono}
+🔧 Tipo Intervento: ${tipo}
 
-            // Reset button state
-            if (btnText) btnText.style.display = 'inline';
-            if (btnLoading) btnLoading.style.display = 'none';
-            submitBtn.disabled = false;
-        }
+═══════════════════════════════════
+📝 DESCRIZIONE PROGETTO
+═══════════════════════════════════
+
+${messaggio}
+
+═══════════════════════════════════
+
+Resto in attesa di un vostro cortese riscontro.
+
+Cordiali saluti,
+${nome}
+
+---
+Messaggio inviato dal sito canguedil.it`;
+
+        // Codifica per URL
+        const mailtoUrl = `mailto:canguedil@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        // Apre il client email
+        window.location.href = mailtoUrl;
     });
 }
+

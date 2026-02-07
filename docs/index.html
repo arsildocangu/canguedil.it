@@ -214,8 +214,7 @@
 
             <div class="social-showcase">
                 <a href="https://www.instagram.com/canguedil?igsh=MXU5cTh0N3NuNHFiZg==" target="_blank"
-                    rel="noopener noreferrer"
-                    class="clickable-box instagram-container reveal">
+                    rel="noopener noreferrer" class="clickable-box instagram-container reveal">
                     <div class="showcase-title instagram-title">
                         <i class="fab fa-instagram"></i>
                         <h3>Galleria Progetti</h3>
@@ -246,8 +245,8 @@
                     </div>
                     <div class="preview-placeholder preview-maps">
                         <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0"
-                            marginwidth="0"
-                            loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mappa sede Cangu Edil"
+                            marginwidth="0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                            title="Mappa sede Cangu Edil"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2879.3092939644927!2d10.661735776495372!3d43.83737073501659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d5891390492817%3A0x281987514332204!2sCangu%20Edil!5e0!3m2!1sit!2sit!4v1732531570000!5m2!1sit!2sit">
                         </iframe>
                     </div>
@@ -322,57 +321,43 @@
                         </div>
                     </div>
 
-                    <!-- Contact Form -->
+                    <!-- Contact Form - Mailto Raffinato -->
                     <div class="contact-form-container reveal delay-100">
                         <h3 class="contact-info-title">Richiedi Preventivo</h3>
-                        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" id="contact-form">
-                            <!-- Web3Forms Access Key - Verrà generato automaticamente -->
-                            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-                            <!-- Redirect dopo invio -->
-                            <input type="hidden" name="redirect" value="https://canguedil.it/?success=true">
-                            <!-- Subject personalizzato -->
-                            <input type="hidden" name="subject" value="Nuova Richiesta Preventivo - Cangu Edil">
-                            <!-- From name -->
-                            <input type="hidden" name="from_name" value="Sito Web Cangu Edil">
-                            <!-- Honeypot anti-spam (nascosto) -->
-                            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-                            
+                        <form class="contact-form" id="contact-form">
                             <div class="form-group">
-                                <input type="text" name="nome" class="form-input" placeholder="Il tuo nome" required>
+                                <input type="text" name="nome" id="form-nome" class="form-input"
+                                    placeholder="Il tuo nome *" required>
                             </div>
                             <div class="form-group">
-                                <input type="email" name="email" class="form-input" placeholder="La tua email" required>
+                                <input type="email" name="email" id="form-email" class="form-input"
+                                    placeholder="La tua email *" required>
                             </div>
                             <div class="form-group">
-                                <input type="tel" name="telefono" class="form-input" placeholder="Telefono" required>
+                                <input type="tel" name="telefono" id="form-telefono" class="form-input"
+                                    placeholder="Telefono *" required>
                             </div>
                             <div class="form-group">
-                                <select name="tipo_intervento" class="form-input" required>
-                                    <option value="" disabled selected>Tipo di intervento</option>
+                                <select name="tipo_intervento" id="form-tipo" class="form-input" required>
+                                    <option value="" disabled selected>Tipo di intervento *</option>
                                     <option value="Ristrutturazione">Ristrutturazione</option>
                                     <option value="Nuova Costruzione">Nuova Costruzione</option>
                                     <option value="Piscina">Piscina</option>
                                     <option value="Tetto/Copertura">Tetto/Copertura</option>
+                                    <option value="Pavimentazione">Pavimentazione</option>
+                                    <option value="Costruzione in Pietra">Costruzione in Pietra</option>
                                     <option value="Altro">Altro</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <textarea name="messaggio" class="form-input" rows="4"
+                                <textarea name="messaggio" id="form-messaggio" class="form-input" rows="4"
                                     placeholder="Descrivi brevemente il tuo progetto..." required></textarea>
                             </div>
                             <button type="submit" class="btn btn-accent btn-block" id="submit-btn">
-                                <span class="btn-text">Invia Richiesta</span>
-                                <span class="btn-loading" style="display: none;">
-                                    <i class="fas fa-spinner fa-spin"></i> Invio in corso...
-                                </span>
+                                <i class="fas fa-envelope"></i> Apri Email e Invia
                             </button>
+                            <p class="form-hint">Cliccando si aprirà la tua app email con i dati compilati</p>
                         </form>
-                        <!-- Success message -->
-                        <div class="form-success" id="form-success" style="display: none;">
-                            <i class="fas fa-check-circle"></i>
-                            <h4>Richiesta Inviata!</h4>
-                            <p>Ti risponderemo al più presto.</p>
-                        </div>
                     </div>
                 </div>
             </div>
