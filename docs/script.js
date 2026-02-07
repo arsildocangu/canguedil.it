@@ -102,7 +102,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Reveal animations on scroll
-const revealItems = document.querySelectorAll('.reveal');
+const revealItems = document.querySelectorAll('.reveal, .blueprint-line, .tech-reveal, .tech-border');
 if ('IntersectionObserver' in window && revealItems.length > 0) {
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

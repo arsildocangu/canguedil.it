@@ -39,6 +39,14 @@
     --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.12);
+
+    /* Blueprint Theme */
+    --blueprint-bg: #0a1628;
+    --blueprint-line: rgba(100, 180, 255, 0.15);
+    --blueprint-line-accent: rgba(100, 180, 255, 0.4);
+    --blueprint-text: rgba(200, 225, 255, 0.9);
+    --blueprint-grid-size: 30px;
+    --font-technical: 'Courier New', monospace;
 }
 
 /* Reset & Base Styles */
@@ -358,7 +366,7 @@ img {
     }
 }
 
-/* Hero Section */
+/* Hero Section - Blueprint Theme */
 .hero {
     min-height: 100vh;
     min-height: 100svh;
@@ -369,6 +377,7 @@ img {
     overflow: hidden;
     padding-top: calc(var(--header-height) + clamp(24px, 7vh, 80px));
     padding-bottom: clamp(48px, 9vh, 96px);
+    background-color: var(--blueprint-bg);
 }
 
 .hero-bg {
@@ -377,33 +386,36 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('./assets/hero-blueprint.png');
-    background-size: cover;
-    background-position: center bottom;
-    z-index: -2;
+    /* Blueprint Grid Pattern */
+    background-image:
+        linear-gradient(var(--blueprint-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px),
+        linear-gradient(var(--blueprint-line-accent) 1px, transparent 1px),
+        linear-gradient(90deg, var(--blueprint-line-accent) 1px, transparent 1px);
+    background-size:
+        var(--blueprint-grid-size) var(--blueprint-grid-size),
+        var(--blueprint-grid-size) var(--blueprint-grid-size),
+        calc(var(--blueprint-grid-size) * 5) calc(var(--blueprint-grid-size) * 5),
+        calc(var(--blueprint-grid-size) * 5) calc(var(--blueprint-grid-size) * 5);
+    background-position: center center;
+    z-index: 0;
+    opacity: 0.8;
 }
 
-.hero-bg::before {
+.hero::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(27, 38, 49, 0.8), rgba(27, 38, 49, 0.56));
+    background: radial-gradient(circle at center, transparent 0%, var(--blueprint-bg) 90%);
+    pointer-events: none;
+    z-index: 1;
 }
 
-.hero-shape {
-    position: absolute;
-    right: -12vw;
-    bottom: -24vh;
-    width: min(62vw, 780px);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(192, 160, 98, 0.38) 0%, rgba(192, 160, 98, 0) 70%);
-    pointer-events: none;
-    z-index: -1;
-}
+/* .hero-bg::before rimosso */
+/* .hero-shape rimosso */
 
 .hero-content {
     position: relative;
@@ -418,6 +430,37 @@ img {
 .hero-title-container {
     max-width: 820px;
     margin: 0 auto;
+    border: 1px solid var(--blueprint-line-accent);
+    padding: 30px;
+    background: rgba(10, 22, 40, 0.4);
+    backdrop-filter: blur(2px);
+    position: relative;
+    margin-bottom: 30px;
+}
+
+/* Angoli tecnici */
+.hero-title-container::before,
+.hero-title-container::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--accent);
+    transition: all 0.5s ease;
+}
+
+.hero-title-container::before {
+    top: -1px;
+    left: -1px;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.hero-title-container::after {
+    bottom: -1px;
+    right: -1px;
+    border-left: 0;
+    border-top: 0;
 }
 
 .hero-title {
@@ -426,41 +469,63 @@ img {
 
 .hero-text-small {
     display: block;
-    font-size: clamp(0.85rem, 1.6vw, 1.15rem);
-    letter-spacing: clamp(2px, 0.6vw, 4px);
+    font-family: var(--font-technical);
+    font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+    letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: clamp(12px, 2vh, 26px);
-    font-weight: 600;
+    margin-bottom: 15px;
+    font-weight: 400;
+    position: relative;
+    display: inline-block;
+}
+
+.hero-text-small::before,
+.hero-text-small::after {
+    content: '-';
+    margin: 0 10px;
+    color: var(--blueprint-line-accent);
 }
 
 .hero-text-large {
     display: block;
-    font-size: clamp(2.5rem, 10vw, 6rem);
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 10vw, 5.5rem);
     font-weight: 700;
-    line-height: 0.96;
-    margin-bottom: clamp(8px, 1.4vh, 14px);
-    letter-spacing: clamp(1px, 0.3vw, 2px);
+    line-height: 0.9;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--text-light);
+    text-shadow: 0 0 15px rgba(100, 180, 255, 0.25);
+    word-break: break-word;
 }
 
 .hero-text-medium {
     display: block;
-    font-size: clamp(1.1rem, 4vw, 2.2rem);
-    font-style: italic;
-    font-weight: 500;
-    margin-bottom: clamp(18px, 4vh, 30px);
-    letter-spacing: 1px;
-    color: var(--accent);
+    font-family: var(--font-technical);
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 0;
+    letter-spacing: 3px;
+    color: var(--blueprint-text);
+    text-transform: uppercase;
 }
 
 .hero-subtitle {
-    font-size: clamp(0.95rem, 2.2vw, 1.1rem);
-    max-width: 600px;
-    margin: 0 auto clamp(26px, 5vh, 42px);
-    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-technical);
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    max-width: 650px;
+    margin: 0 auto clamp(30px, 5vh, 50px);
+    color: rgba(200, 225, 255, 0.8);
     font-weight: 400;
+    line-height: 1.6;
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+    text-align: left;
+    background: linear-gradient(90deg, rgba(192, 160, 98, 0.1) 0%, transparent 100%);
+    padding: 15px 20px;
 }
 
 .hero-buttons {
@@ -566,58 +631,143 @@ img {
     color: var(--text-gray);
 }
 
-/* Services Section */
+/* Services Section - Blueprint Style */
 .services {
-    background-color: var(--bg-off-white);
+    background-color: var(--blueprint-bg);
+    position: relative;
+    padding-top: var(--section-padding-y);
+    padding-bottom: var(--section-padding-y);
+}
+
+.services::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(var(--blueprint-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
+    background-size: var(--blueprint-grid-size) var(--blueprint-grid-size);
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 30px;
+    position: relative;
+    z-index: 2;
 }
 
+/* Service Card - Blueprint Style */
 .service-card {
-    background: var(--bg-light);
+    background: rgba(10, 22, 40, 0.6);
     padding: clamp(26px, 4vw, 40px) clamp(22px, 3vw, 30px);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--blueprint-line);
+    text-align: left;
     transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
     height: 100%;
+    backdrop-filter: blur(5px);
+}
+
+/* Drawing Effect on Scroll/Hover */
+.service-card::before,
+.service-card::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 1px solid var(--blueprint-line-accent);
+    transition: all 0.5s ease;
+    opacity: 0.6;
+}
+
+.service-card::before {
+    top: 0;
+    left: 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.service-card::after {
+    bottom: 0;
+    right: 0;
+    border-left: 0;
+    border-top: 0;
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--accent);
+    transform: translateY(-5px);
+    background: rgba(10, 22, 40, 0.85);
+    border-color: var(--blueprint-line-accent);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
-.service-card:hover .service-icon {
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
-    text-shadow: 0 0 20px rgba(192, 160, 98, 0.4);
+.service-card:hover::before,
+.service-card:hover::after {
+    width: 100%;
+    height: 100%;
+    border-color: var(--accent);
+    opacity: 1;
 }
 
 .service-icon {
     font-size: 2.5rem;
     color: var(--accent);
     margin-bottom: 25px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    text-shadow: 0 0 15px rgba(100, 180, 255, 0.3);
+}
+
+.service-card:hover .service-icon {
+    transform: scale(1.1) rotate(5deg);
+    color: var(--text-light);
+    text-shadow: 0 0 20px var(--accent);
 }
 
 .service-title {
-    font-size: clamp(1.3rem, 2.4vw, 1.5rem);
+    font-family: var(--font-heading);
+    font-size: clamp(1.2rem, 2.2vw, 1.4rem);
     margin-bottom: 15px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .service-desc {
-    color: var(--text-gray);
+    color: var(--blueprint-text);
     font-size: 0.95rem;
+    font-family: var(--font-technical);
+    line-height: 1.7;
 }
 
-/* Projects Section */
+/* Projects Section - Blueprint Style */
 .projects {
-    background-color: var(--bg-light);
+    background-color: var(--blueprint-bg);
+    position: relative;
+    padding-top: var(--section-padding-y);
+    padding-bottom: var(--section-padding-y);
+}
+
+.projects::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(var(--blueprint-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
+    background-size: calc(var(--blueprint-grid-size) * 2) calc(var(--blueprint-grid-size) * 2);
+    opacity: 0.2;
+    pointer-events: none;
 }
 
 .social-showcase {
@@ -625,53 +775,46 @@ img {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
     gap: clamp(20px, 3vw, 40px);
     margin-top: 40px;
+    z-index: 2;
+    position: relative;
 }
 
 .instagram-container,
 .maps-container {
-    background: var(--bg-light);
+    background: rgba(10, 22, 40, 0.6);
     padding: clamp(22px, 3.5vw, 40px);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--blueprint-line);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(5px);
 }
 
 .instagram-container {
-    border-top: 4px solid #E1306C;
+    border-top: 2px solid #E1306C;
 }
 
 .maps-container {
-    border-top: 4px solid #4285F4;
+    border-top: 2px solid #4285F4;
 }
 
-.instagram-container:hover {
-    box-shadow: var(--shadow-md);
-    border-color: #C13584;
-    background: linear-gradient(to bottom, rgba(225, 48, 108, 0.03), var(--bg-light));
-}
-
+.instagram-container:hover,
 .maps-container:hover {
-    box-shadow: var(--shadow-md);
-    border-color: #34A853;
-    background: linear-gradient(to bottom, rgba(66, 133, 244, 0.03), var(--bg-light));
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: var(--blueprint-line-accent);
+    transform: translateY(-5px);
 }
 
 .instagram-title i {
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #E1306C;
     font-size: 2rem;
+    text-shadow: 0 0 10px rgba(225, 48, 108, 0.4);
 }
 
 .maps-title i {
-    background: linear-gradient(45deg, #4285F4, #34A853, #FBBC05, #EA4335);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #4285F4;
     font-size: 2rem;
+    text-shadow: 0 0 10px rgba(66, 133, 244, 0.4);
 }
 
 .showcase-title {
@@ -683,18 +826,9 @@ img {
 
 .showcase-title h3 {
     font-size: clamp(1.25rem, 2.8vw, 1.5rem);
-}
-
-.showcase-title i {
-    font-size: 1.8rem;
-}
-
-.instagram-title i {
-    color: #E1306C;
-}
-
-.maps-title i {
-    color: #4285F4;
+    font-family: var(--font-heading);
+    color: var(--text-light);
+    letter-spacing: 1px;
 }
 
 .preview-placeholder {
@@ -1438,4 +1572,102 @@ img {
     .scroll-indicator {
         display: none;
     }
+}
+
+/* Blueprint Animations */
+@keyframes drawLine {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes drawBorder {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeTech {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.blueprint-line {
+    position: relative;
+    overflow: hidden;
+}
+
+.blueprint-line::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--accent);
+    transition: width 1s ease;
+}
+
+.blueprint-line.active::after {
+    width: 100%;
+}
+
+.tech-reveal {
+    opacity: 0;
+}
+
+.tech-reveal.active {
+    animation: fadeTech 0.8s ease forwards;
+}
+
+.tech-border {
+    position: relative;
+}
+
+.tech-border::before,
+.tech-border::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: var(--blueprint-line-accent);
+    transition: width 0.8s ease;
+}
+
+.tech-border::before {
+    top: 0;
+    left: 0;
+}
+
+.tech-border::after {
+    bottom: 0;
+    right: 0;
+}
+
+.tech-border.active::before,
+.tech-border.active::after {
+    width: 100%;
 }
