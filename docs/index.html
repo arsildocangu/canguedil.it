@@ -22,7 +22,7 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/svg+xml" href="./assets/logo.png">
+    <link rel="icon" type="image/png" href="./assets/logo.png">
 </head>
 
 <body>
@@ -33,24 +33,25 @@
                 <div class="logo">
                     <img src="./assets/logo.png" alt="Cangu Edil Logo" class="logo-png" width="50" height="50">
                 </div>
-                <ul class="nav-links">
+                <ul class="nav-links" id="primary-navigation">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">Chi Siamo</a></li>
                     <li><a href="#services">Servizi</a></li>
                     <li><a href="#projects">Galleria</a></li>
                     <li><a href="#contact">Contatti</a></li>
                 </ul>
-                <div class="menu-toggle">
+                <button class="menu-toggle" type="button" aria-label="Apri menu di navigazione"
+                    aria-controls="primary-navigation" aria-expanded="false">
                     <span class="line-1"></span>
                     <span class="line-2"></span>
-                </div>
+                </button>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section con modifiche -->
     <section id="home" class="hero">
-        <div class="hero-bg material-bg"></div>
+        <div class="hero-bg"></div>
         <div class="hero-shape"></div>
         <div class="container">
             <div class="hero-content">
@@ -131,12 +132,7 @@
                     </div>
                 </div>
 
-                <div class="material-icons-container reveal">
-                    <div class="material-design-construction">
-                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop"
-                            alt="Chi Siamo" class="about-image" />
-                    </div>
-                </div>
+                <!-- Image removed as requested -->
             </div>
         </div>
     </section>
@@ -218,49 +214,56 @@
 
             <div class="social-showcase">
                 <a href="https://www.instagram.com/canguedil?igsh=MXU5cTh0N3NuNHFiZg==" target="_blank"
+                    rel="noopener noreferrer"
                     class="clickable-box instagram-container reveal">
                     <div class="showcase-title instagram-title">
                         <i class="fab fa-instagram"></i>
                         <h3>Galleria Progetti</h3>
                     </div>
-                    <div class="preview-placeholder" style="position: relative; padding: 0; overflow: hidden;">
-                        <img src="./assets/instagram-preview.png" alt="Instagram Profile Preview"
-                            style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95;">
-                        <div
-                            style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(27, 38, 49, 0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid var(--accent);">
-                            <img src="./assets/logo.png" alt="Cangu Edil"
-                                style="width: 50px; height: auto; filter: brightness(0) invert(1);">
+                    <div class="preview-placeholder preview-instagram">
+                        <img src="./assets/instagram-preview.png" alt="Instagram Profile Preview" class="preview-image"
+                            loading="lazy" decoding="async">
+                        <div class="preview-logo-badge">
+                            <img src="./assets/logo.png" alt="Cangu Edil" class="preview-logo" loading="lazy"
+                                decoding="async">
                         </div>
                     </div>
-                    <p>Visita il nostro profilo Instagram per vedere le foto dei nostri progetti e seguire le nostre
-                        realizzazioni più recenti.</p>
+                    <div class="social-text-content">
+                        <h4>Ispirazione quotidiana</h4>
+                        <p>Segui i nostri cantieri in tempo reale e lasciati ispirare dalle trasformazioni dei nostri
+                            progetti.</p>
+                    </div>
                     <span class="social-btn instagram-btn">
-                        <i class="fab fa-instagram"></i> Visita la galleria
+                        <i class="fab fa-instagram"></i> Segui su Instagram
                     </span>
                 </a>
 
-                <a href="https://maps.app.goo.gl/1oNbQgrF24UNGzFN8" target="_blank"
+                <a href="https://maps.app.goo.gl/1oNbQgrF24UNGzFN8" target="_blank" rel="noopener noreferrer"
                     class="clickable-box maps-container reveal">
                     <div class="showcase-title maps-title">
                         <i class="fab fa-google"></i>
-                        <h3>Recensioni Google</h3>
+                        <h3>Dicono di Noi</h3>
                     </div>
-                    <div class="preview-placeholder" style="padding: 0; overflow: hidden; pointer-events: none;">
+                    <div class="preview-placeholder preview-maps">
                         <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0"
                             marginwidth="0"
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mappa sede Cangu Edil"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2879.3092939644927!2d10.661735776495372!3d43.83737073501659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d5891390492817%3A0x281987514332204!2sCangu%20Edil!5e0!3m2!1sit!2sit!4v1732531570000!5m2!1sit!2sit">
                         </iframe>
                     </div>
-                    <p>Leggi le opinioni dei nostri clienti, guarda le foto dei lavori completati e contattaci
-                        direttamente
-                        tramite Google Maps.</p>
+                    <div class="social-text-content">
+                        <h4>La voce dei clienti</h4>
+                        <p>Leggi le recensioni verificate a 5 stelle su Google Maps e scopri perché i nostri clienti si
+                            fidano di noi.</p>
+                    </div>
                     <span class="social-btn maps-btn">
-                        <i class="fas fa-external-link-alt"></i> Vedi su Google Maps
+                        <i class="fas fa-external-link-alt"></i> Leggi le Recensioni su Google
                     </span>
                 </a>
             </div>
         </div>
     </section>
+
 
     <!-- Contact Section -->
     <section id="contact" class="contact section">
@@ -269,61 +272,86 @@
             <p class="section-subtitle text-center">Parliamo del tuo prossimo progetto</p>
 
             <div class="contact-wrapper">
-                <div class="contact-info contact-info-full reveal">
-                    <h3 class="contact-info-title">Informazioni di Contatto</h3>
-                    <p class="contact-text">Siamo a tua disposizione per un consulto gratuito o per fornirti maggiori
-                        informazioni sui nostri servizi. Contattaci o vieni a trovarci presso la nostra sede.</p>
+                <div class="contact-grid">
+                    <div class="contact-info reveal">
+                        <h3 class="contact-info-title">Contatti Diretti</h3>
+                        <p class="contact-text">Siamo a tua disposizione per un consulto gratuito o per fornirti
+                            maggiori
+                            informazioni sui nostri servizi. Contattaci o vieni a trovarci presso la nostra sede.</p>
 
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-item-content">
+                                    <h4>Sede</h4>
+                                    <p>Via di Montecarlo 79, 55015 Montecarlo (LU)</p>
+                                </div>
                             </div>
-                            <div class="contact-item-content">
-                                <h4>Sede</h4>
-                                <p>Via di Montecarlo 79, 55015 Montecarlo (LU)</p>
-                            </div>
-                        </div>
 
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-item-content">
-                                <h4>Telefono</h4>
-                                <p>+39 338 751 8041</p>
-                            </div>
-                        </div>
+                            <a href="tel:+393387518041" class="contact-item clickable">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-item-content">
+                                    <h4>Telefono</h4>
+                                    <p>+39 338 751 8041</p>
+                                </div>
+                            </a>
 
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-item-content">
-                                <h4>Email</h4>
-                                <p>canguedil@gmail.com</p>
-                            </div>
-                        </div>
+                            <a href="mailto:canguedil@gmail.com" class="contact-item clickable">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-item-content">
+                                    <h4>Email</h4>
+                                    <p>canguedil@gmail.com</p>
+                                </div>
+                            </a>
 
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="contact-item-content">
-                                <h4>Orari</h4>
-                                <p>Lun-Sab: 06:30-19:30<br>Domenica: Chiuso<br><small>Gli orari possono variare durante
-                                        le festività</small></p>
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="contact-item-content">
+                                    <h4>Orari</h4>
+                                    <p>Lun-Sab: 06:30-19:30<br>Domenica: Chiuso</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="contact-cta">
-                        <a href="tel:+393387518041" class="btn btn-primary contact-btn">
-                            <i class="fas fa-phone"></i> Chiama Ora
-                        </a>
-                        <a href="mailto:canguedil@gmail.com" class="btn btn-accent contact-btn">
-                            <i class="fas fa-envelope"></i> Invia Email
-                        </a>
+                    <!-- Contact Form -->
+                    <div class="contact-form-container reveal delay-100">
+                        <h3 class="contact-info-title">Richiedi Preventivo</h3>
+                        <form class="contact-form" action="mailto:canguedil@gmail.com" method="post"
+                            enctype="text/plain">
+                            <div class="form-group">
+                                <input type="text" name="nome" class="form-input" placeholder="Il tuo nome" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-input" placeholder="La tua email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="telefono" class="form-input" placeholder="Telefono" required>
+                            </div>
+                            <div class="form-group">
+                                <select name="tipo_intervento" class="form-input" required>
+                                    <option value="" disabled selected>Tipo di intervento</option>
+                                    <option value="ristrutturazione">Ristrutturazione</option>
+                                    <option value="nuova-costruzione">Nuova Costruzione</option>
+                                    <option value="piscina">Piscina</option>
+                                    <option value="tetto">Tetto/Copertura</option>
+                                    <option value="altro">Altro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="messaggio" class="form-input" rows="4"
+                                    placeholder="Descrivi brevemente il tuo progetto..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-accent btn-block">Invia Richiesta</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -382,9 +410,15 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <div class="back-to-top">
+    <button class="back-to-top" type="button" aria-label="Torna in alto">
         <i class="fas fa-arrow-up"></i>
-    </div>
+    </button>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/393387518041" target="_blank" rel="noopener noreferrer" class="whatsapp-btn"
+        title="Chatta con noi su WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
     <script src="script.js"></script>
 </body>
 

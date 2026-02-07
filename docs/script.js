@@ -3,161 +3,144 @@ const header = document.querySelector('.header');
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 const backToTopBtn = document.querySelector('.back-to-top');
-const materialIcons = document.querySelectorAll('.material-icon-hero');
-const materialIconsAbout = document.querySelectorAll('.material-icon-about');
 
-// Menu Toggle
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('active');
-    navLinks.classList.toggle('active');
-});
-
-// Close menu on link click
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        menuToggle.classList.remove('active');
-        navLinks.classList.remove('active');
-    });
-});
-
-// Sticky Header
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
+const setMenuState = (isOpen) => {
+    if (!menuToggle || !navLinks) {
+        return;
     }
-});
 
-// Back to Top Button
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 500) {
-        backToTopBtn.classList.add('show');
-    } else {
-        backToTopBtn.classList.remove('show');
-    }
-});
-
-backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-// Enhanced hover effect for hero icons
-materialIcons.forEach(icon => {
-    icon.addEventListener('mouseover', () => {
-        // Stop animation during hover
-        icon.style.animationPlayState = 'paused';
-        icon.style.zIndex = '10';
-        icon.style.color = 'var(--accent)';
-        icon.style.transform = 'scale(1.2)';
-    });
-
-    icon.addEventListener('mouseout', () => {
-        // Reset to original state
-        icon.style.animationPlayState = 'running';
-        icon.style.zIndex = '';
-        icon.style.color = '';
-        icon.style.transform = '';
-    });
-});
-
-// Material Icons About Section Animation
-materialIconsAbout.forEach(icon => {
-    icon.addEventListener('mouseover', () => {
-        materialIconsAbout.forEach(i => {
-            i.style.opacity = '0.6';
-        });
-        icon.style.opacity = '1';
-        icon.style.transform = 'scale(1.2)';
-        icon.style.zIndex = '10';
-        icon.style.color = 'var(--accent)';
-    });
-
-    icon.addEventListener('mouseout', () => {
-        materialIconsAbout.forEach(i => {
-            i.style.opacity = '';
-            i.style.transform = '';
-            i.style.zIndex = '';
-            i.style.color = '';
-        });
-    });
-});
-
-// Smooth scroll for all anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-
-        if (targetElement) {
-            const headerHeight = document.querySelector('.header').offsetHeight;
-            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
-// Reveal animations on scroll using IntersectionObserver
-const observerOptions = {
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px"
+    menuToggle.classList.toggle('active', isOpen);
+    navLinks.classList.toggle('active', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Chiudi menu di navigazione' : 'Apri menu di navigazione');
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            // Optional: Stop observing once revealed
-            // observer.unobserve(entry.target);
+const closeMenu = () => {
+    setMenuState(false);
+};
+
+if (menuToggle && navLinks) {
+    menuToggle.addEventListener('click', () => {
+        const isOpen = !menuToggle.classList.contains('active');
+        setMenuState(isOpen);
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeMenu();
         }
     });
-}, observerOptions);
 
-document.querySelectorAll('.reveal').forEach(el => {
-    observer.observe(el);
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeMenu();
+        }
+    }, { passive: true });
+
+    document.addEventListener('click', (event) => {
+        const clickedInsideMenu = navLinks.contains(event.target);
+        const clickedToggle = menuToggle.contains(event.target);
+        if (!clickedInsideMenu && !clickedToggle) {
+            closeMenu();
+        }
+    });
+}
+
+const onScroll = () => {
+    const scrollPosition = window.scrollY || window.pageYOffset;
+
+    if (header) {
+        header.classList.toggle('scrolled', scrollPosition > 40);
+    }
+
+    if (backToTopBtn) {
+        backToTopBtn.classList.toggle('show', scrollPosition > 500);
+    }
+};
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// Smooth scroll for in-page links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (event) => {
+        const targetId = anchor.getAttribute('href');
+        if (!targetId || targetId.length < 2) {
+            return;
+        }
+
+        const targetElement = document.querySelector(targetId);
+        if (!targetElement) {
+            return;
+        }
+
+        event.preventDefault();
+        const headerHeight = header ? header.offsetHeight : 0;
+        const targetPosition = Math.max(
+            0,
+            targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight
+        );
+
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    });
 });
+
+// Reveal animations on scroll
+const revealItems = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window && revealItems.length > 0) {
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealItems.forEach(item => {
+        revealObserver.observe(item);
+    });
+} else {
+    revealItems.forEach(item => {
+        item.classList.add('active');
+    });
+}
 
 // Auto-elevate service cards on scroll
-const serviceCardObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-        } else {
-            entry.target.classList.remove('active');
-        }
+const serviceCards = document.querySelectorAll('.service-card');
+if ('IntersectionObserver' in window && serviceCards.length > 0) {
+    const serviceCardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            entry.target.classList.toggle('active', entry.isIntersecting);
+        });
+    }, {
+        threshold: 0.55,
+        rootMargin: '0px'
     });
-}, {
-    threshold: 0.6,
-    rootMargin: "0px"
-});
 
-document.querySelectorAll('.service-card').forEach(card => {
-    serviceCardObserver.observe(card);
-});
-
-// Staggered animation for grids
-const staggerObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const children = entry.target.querySelectorAll('.reveal');
-            children.forEach((child, index) => {
-                setTimeout(() => {
-                    child.classList.add('active');
-                }, index * 100); // 100ms delay between each item
-            });
-            staggerObserver.unobserve(entry.target);
-        }
+    serviceCards.forEach(card => {
+        serviceCardObserver.observe(card);
     });
-}, { threshold: 0.1 });
-
-// Observe grids for staggered effects if needed
-// document.querySelectorAll('.services-grid').forEach(grid => staggerObserver.observe(grid));
+} else {
+    serviceCards.forEach(card => {
+        card.classList.add('active');
+    });
+}

@@ -48,6 +48,38 @@ Per eseguire il sito localmente:
    ```
 3. Apri il file `index.html` nel tuo browser preferito
 
+### Server Locale (Consigliato)
+
+Per evitare problemi di cache e comportamenti diversi tra browser, puoi avviare un server statico locale.
+
+Foreground (si ferma con Ctrl+C):
+```bash
+./scripts/serve.sh
+```
+
+Background (resta acceso anche chiudendo il terminale):
+```bash
+./scripts/serve-bg.sh
+```
+
+Stop background:
+```bash
+./scripts/stop-serve.sh
+```
+
+Apri poi `http://127.0.0.1:4173` (o `http://localhost:4173`).
+
+Se non risponde:
+```bash
+./scripts/stop-serve.sh
+./scripts/serve.sh
+```
+
+Oppure cambia porta:
+```bash
+./scripts/serve.sh 8080
+```
+
 ## 🌐 Deployment
 
 Il sito è attualmente ospitato su GitHub Pages ed è accessibile all'indirizzo:
