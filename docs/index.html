@@ -49,11 +49,13 @@
         </div>
     </header>
 
-    <!-- Hero Section con modifiche -->
+    <!-- Hero Section con 3D -->
     <section id="home" class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-shape"></div>
-        <div class="container">
+        <div id="canvas-container-3d"></div>
+        <!-- Overlay gradient per leggibilità -->
+        <div class="hero-overlay-3d"></div>
+
+        <div class="container relative-z">
             <div class="hero-content">
                 <div class="hero-title-container">
                     <h1 class="hero-title">
@@ -426,6 +428,7 @@
         <i class="fab fa-whatsapp"></i>
     </a>
     <script src="script.js"></script>
+    <script type="module" src="script-3d.js"></script>
 </body>
 
 </html>
